@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Daily Expense Tracker</title>
+  <link rel="stylesheet" type="text/CSS" href="expensesheet.css">
+   
+  
+</head>
+<body>
+  <h1>Daily Expense Tracker</h1>
+  <div class="container">
+    <form id="expense-form">
+      <div class="form-group">
+        <label for="expense-amount">Expense amount:</label>
+        <input type="text" id="expense-amount" name="expense-amount" placeholder="Enter expense amount" />
+      </div>
+      <div class="form-group">
+        <button type="submit" class="button">Add Expense</button>
+      </div>
+    </form>
+    <div id="total-expenses" class="total-expenses"></div>
+  </div>
+
+  <script>
+    document.getElementById('expense-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var expenseInput = document.getElementById('expense-amount');
+      var expenseAmount = parseFloat(expenseInput.value);
+
+      if (!isNaN(expenseAmount)) {
+        var totalExpensesElement = document.getElementById('total-expenses');
+        var currentTotal = parseFloat(totalExpensesElement.innerText) || 0;
+        var newTotal = currentTotal + expenseAmount;
+        totalExpensesElement.innerText = 'Total expenses: $' + newTotal.toFixed(2);
+        expenseInput.value = '';
+      } else {
+        alert('Invalid input. Please enter a valid expense amount.');
+      }
+    });
+  </script>
+</body>
+</html>
